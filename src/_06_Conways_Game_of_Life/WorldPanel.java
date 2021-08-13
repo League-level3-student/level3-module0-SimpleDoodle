@@ -28,7 +28,7 @@ Cell[][] cells;
         this.cellsPerRow = cpr;
 
         // 2. Calculate the cell size.
-	      cellSize = cells.length;
+	      cellSize = w/cpr;
 
         // 3a. Initialize the cell array to the appropriate size.
 	     cells = new Cell[cellsPerRow][cellsPerRow];
@@ -45,11 +45,11 @@ Cell[][] cells;
     public void randomizeCells() {
         // 4. Iterate through each cell and randomly set each
         //    cell's isAlive memeber to true of false
-    	Random r = new Random(1);
+    	Random r = new Random();
     	for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				int rand = r.nextInt(1);
-				if (rand == 1) {
+				boolean rand = r.nextBoolean();
+				if (rand == true) {
 					cells[i][j].isAlive = true;
 				}
 				else {
@@ -103,11 +103,16 @@ Cell[][] cells;
         int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
         for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				livingNeighbors[i][j] = getLivingNeighbors(cells, cellsPerRow, cellsPerRow);
+				livingNeighbors[i][j] = getLivingNeighbors(cells, i, j);
 			}
 		}
         // 8. check if each cell should live or die
-        
+        for (int k = 0; k < cells.length; k++) {
+			for (int k2 = 0; k2 < cells.length; k2++) {
+				cells[k][k2].liveOrDie(livingNeighbors[k][k2]);
+			}
+		}
+
         repaint();
     }
 
@@ -172,9 +177,18 @@ Cell[][] cells;
         //    cellSize, meaning it's possible to click inside of a cell. You
         //    have to determine the cell that was clicked from the pixel
         //    location and toggle the 'isAlive' variable for that cell.
-
+					if (cells[e.getX()/50][e.getY()/50].isAlive == false) {
+						cells[e.getX()/50][e.getY()/50].isAlive = true;
+					}
+					else {
+						cells[e.getX()/50][e.getY()/50].isAlive = false;
+					}
+				
+			
+	
         repaint();
     }
+    
 
     @Override
     public void mouseReleased(MouseEvent e) {
