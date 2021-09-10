@@ -53,12 +53,20 @@ public class TheWrongWayCow {
     public static int[] findWrongWayCow(final char[][] field) {
     	for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field.length; j++) {
-				if (field[i][j] == 'c') {
-					int[] coord = new int[2];
-					coord[0] = i;
-					coord[1] = j;
-					return coord;
+				if (field[i][j] == 'c' && field[i+1][j] =='o') {
+
 				}
+				else if (field[i][j] == 'c' && (field[i+1][j] != 'o')) {
+						int[] coord = new int[2];
+						coord[0] = i;
+						coord[1] = j;
+						System.out.println(coord[0] + "," + coord[1]);
+						return coord;
+				}
+			//	int[] coord = new int[2];
+			//	coord[0] = i;
+			//	coord[1] = j;
+			//	return coord;
 			}
 		}
         // Fill in the code to return the [col, row] coordinate position of the
