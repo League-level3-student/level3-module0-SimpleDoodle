@@ -48,13 +48,16 @@
 
 package _07_The_Wrong_Way_Cow;
 
+import java.util.ArrayList;
+
 public class TheWrongWayCow {
 
     public static int[] findWrongWayCow(final char[][] field) {
+    	ArrayList <Integer> direction = new ArrayList<>();
     	for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field.length; j++) {
-				if (field[i][j] == 'c' && field[i+1][j] =='o') {
-
+				if (field[i][j] == 'c' && field[i+1][j] == 'o') {
+					
 				}
 				else if (field[i][j] == 'c' && (field[i+1][j] != 'o')) {
 						int[] coord = new int[2];
