@@ -53,24 +53,75 @@ import java.util.ArrayList;
 public class TheWrongWayCow {
 
     public static int[] findWrongWayCow(final char[][] field) {
-    	ArrayList <Integer> direction = new ArrayList<>();
+    	ArrayList <Integer> directionL = new ArrayList<>();
+    	ArrayList <Integer> directionR = new ArrayList<>();
+    	ArrayList <Integer> directionU = new ArrayList<>();
+    	ArrayList <Integer> directionD = new ArrayList<>();
+    	int leftCount = 0;
+    	int rightCount = 0;
+    	int upCount = 0;
+    	int downCount = 0;
+    	int count = 0;
     	for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field.length; j++) {
-				if (field[i][j] == 'c' && field[i+1][j] == 'o') {
-					
+			for (int j = 0; j < field[0].length; j++) {
+				if (field[i][j] == 'c' &&i+2 < field.length && field[i+1][j] == 'o' &&  field[i+2][j] == 'w') {
+					directionL.add(j);
+					directionL.add(i);
+					leftCount++;
+					count++;
 				}
-				else if (field[i][j] == 'c' && (field[i+1][j] != 'o')) {
-						int[] coord = new int[2];
-						coord[0] = i;
-						coord[1] = j;
-						System.out.println(coord[0] + "," + coord[1]);
-						return coord;
+				else if (field[i][j] == 'c' && i-2 >= 0 &&field[i-1][j] == 'o' && i-2 >= 0 && field[i-2][j] == 'w') {
+					directionR.add(j);
+					directionR.add(i);
+					rightCount++;
+					count++;
 				}
+				else if (field[i][j] == 'c' && j+2 < field.length && field[i][j+1] == 'o' &&  field[i][j+2] == 'w') {
+					directionD.add(j);
+					directionD.add(i);
+					downCount++;
+					count++;
+				}
+				else if (field[i][j] == 'c' && j-2 >= 0 && field[i][j-1] == 'o' && j-2 >= 0 && field[i][j-2] == 'w') {
+					directionU.add(j);
+					directionU.add(i);
+					upCount++;
+					count++;
+				}
+				
 			//	int[] coord = new int[2];
 			//	coord[0] = i;
 			//	coord[1] = j;
 			//	return coord;
 			}
+		}
+    	if (leftCount == 1) {
+			int[] coord = new int[2];
+			coord[0] = directionL.get(0);
+			coord[1] = directionL.get(1);
+			System.out.println(coord[0] + "," + coord[1]);
+			return coord;
+		}
+		else if (rightCount == 1) {
+			int[] coord = new int[2];
+			coord[0] = directionR.get(0);
+			coord[1] = directionR.get(1);
+			System.out.println(coord[0] + "," + coord[1]);
+			return coord;
+		}
+		else if (upCount == 1) {
+			int[] coord = new int[2];
+			coord[0] = directionU.get(0);
+			coord[1] = directionU.get(1);
+			System.out.println(coord[0] + "," + coord[1]);
+			return coord;
+		}
+		else if (upCount == 1) {
+			int[] coord = new int[2];
+			coord[0] = directionD.get(0);
+			coord[1] = directionD.get(1);
+			System.out.println(coord[0] + "," + coord[1]);
+			return coord;
 		}
         // Fill in the code to return the [col, row] coordinate position of the
         // head (letter 'c') of the wrong way cow!
