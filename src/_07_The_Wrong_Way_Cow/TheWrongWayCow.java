@@ -64,7 +64,10 @@ public class TheWrongWayCow {
     	int count = 0;
     	for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field[0].length; j++) {
-				if (field[i][j] == 'c' &&i+2 < field.length && field[i+1][j] == 'o' &&  field[i+2][j] == 'w') {
+				if (j == 8 && i == 4) {
+					System.out.println("84");
+				}
+				if (field[i][j] == 'c' && i+2 < field.length && field[i+1][j] == 'o' &&  field[i+2][j] == 'w') {
 					directionL.add(j);
 					directionL.add(i);
 					leftCount++;
@@ -76,7 +79,7 @@ public class TheWrongWayCow {
 					rightCount++;
 					count++;
 				}
-				else if (field[i][j] == 'c' && j+2 < field.length && field[i][j+1] == 'o' &&  field[i][j+2] == 'w') {
+				else if (field[i][j] == 'c' && j+2 < field[0].length && field[i][j+1] == 'o' &&  field[i][j+2] == 'w') {
 					directionD.add(j);
 					directionD.add(i);
 					downCount++;
@@ -116,7 +119,7 @@ public class TheWrongWayCow {
 			System.out.println(coord[0] + "," + coord[1]);
 			return coord;
 		}
-		else if (upCount == 1) {
+		else if (downCount == 1) {
 			int[] coord = new int[2];
 			coord[0] = directionD.get(0);
 			coord[1] = directionD.get(1);

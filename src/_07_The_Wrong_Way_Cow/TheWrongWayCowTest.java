@@ -40,7 +40,7 @@ public class TheWrongWayCowTest {
     }
     return field;
   }
-  
+
   @Test
   public void simple() {
     final char[][] field = new char[][] {
